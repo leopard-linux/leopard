@@ -1,15 +1,18 @@
-all: make_dirs generate_rootfs generate_iso
+all: make_dirs compile_deps generate_rootfs generate_iso
 
 make_dirs:
 	mkdir -p build
 	mkdir -p build/boot
 	mkdir -p build/rootfs
 
+compile_deps:
+	$(MAKE) -C sources/busybox
+	$(MAKE) -C sources/linux
+
 generate_initrd: make_dirs
 	$(MAKE) -C initramfs
 
-# TODO: compile kernel
-generate_rootfs: make_dirs generate_initrd
+generate_rootfs: compile_deps make_dirs generate_initrd
 	cp -r ./isolinux ./build/rootfs/
 	cp -r ./build/boot/ ./build/rootfs/boot/
 	cp -r /usr/lib/syslinux/modules/bios/*.c32 ./build/rootfs/isolinux
@@ -25,4 +28,3 @@ generate_iso: make_dirs generate_rootfs
 
 clean:
 	rm -rf ./build
-	rm -rf ./initramfs/root

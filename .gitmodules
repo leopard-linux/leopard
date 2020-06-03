@@ -1,0 +1,3 @@
+[submodule "sources/busybox"]
+	path = sources/busybox
+	url = https://github.com/leopard-linux/busybox
