@@ -1,0 +1,13 @@
+#!/bin/busybox sh
+
+#Mount things needed by this script
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+
+#Disable kernel messages from popping onto the screen
+echo 0 > /proc/sys/kernel/printk
+
+clear
+
+/bin/busybox sh
+poweroff -f
