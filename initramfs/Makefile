@@ -35,7 +35,7 @@ generate_initramfs:
 	mkdir -p ./rootfs/bin ./rootfs/lib
 
 	# Install Busybox
-	cp ../sources/busybox-1.31.1/busybox ./rootfs/bin/busybox
+	cp ../sources/busybox/busybox ./rootfs/bin/busybox
 	
 	chmod +x ./rootfs/bin/busybox
 
